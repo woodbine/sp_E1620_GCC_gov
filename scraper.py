@@ -27,7 +27,7 @@ table = soup.find('tbody')
 rows = table.findAll(tr)
 
 for row in rows:
-	td = row.find('td)[1]
+	td = row.findAll('td)[1]
 	link = td.find(a, href=True)
 	url = link['href']
 	title = link.contents[0]
