@@ -23,8 +23,7 @@ html = urllib2.urlopen(url)
 soup = BeautifulSoup(html)
 
 # find all entries with the required class
-table = soup.find('tbody')
-rows = table.findAll('tr')
+rows = soup.findAll('tr')
 
 for row in rows:
 	td = row.findAll('td')[1]
