@@ -26,17 +26,19 @@ soup = BeautifulSoup(html)
 rows = soup.findAll('tr')
 
 for row in rows:
-	print row
-	td = row.findAll('td')[1]
-	link = td.find(a, href=True)
-	url = link['href']
-	title = link.contents[0]
-	# create the right strings for the new filename
-	csvYr = title.split(' ')[-1]
-	csvMth = title.split(' ')[-2][:3]
-	csvMth = csvMth.upper()
-	csvMth = convert_mth_strings(csvMth);
-	filename = entity_id + "_" + csvYr + "_" + csvMth + ".csv"
-	todays_date = str(datetime.now())
-	scraperwiki.sqlite.save(unique_keys=['l'], data={"l": url, "f": filename, "d": todays_date })
-	print filename
+	if row.find('td') == None:
+		print 'no file in this row'
+	else:
+		td = row.findAll('td')[1]
+		link = td.find(a, href=True)
+		url = link['href']
+		title = link.contents[0]
+		# create the right strings for the new filename
+		csvYr = title.split(' ')[-1]
+		csvMth = title.split(' ')[-2][:3]
+		csvMth = csvMth.upper()
+		csvMth = convert_mth_strings(csvMth);
+		filename = entity_id + "_" + csvYr + "_" + csvMth + ".csv"
+		todays_date = str(datetime.now())
+		scraperwiki.sqlite.save(unique_keys=['l'], data={"l": url, "f": filename, "d": todays_date })
+		print filename
