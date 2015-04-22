@@ -30,9 +30,7 @@ for row in rows:
 		print 'no file in this row'
 	else:
 		td = row.findAll('td')[1]
-		print td
-		'''
-		link = td.find(a, href=True)
+		link = td.find('a', href=True)
 		url = link['href']
 		title = link.contents[0]
 		# create the right strings for the new filename
@@ -44,4 +42,3 @@ for row in rows:
 		todays_date = str(datetime.now())
 		scraperwiki.sqlite.save(unique_keys=['l'], data={"l": url, "f": filename, "d": todays_date })
 		print filename
-		'''
