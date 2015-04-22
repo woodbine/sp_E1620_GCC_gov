@@ -31,7 +31,7 @@ for row in rows:
 	else:
 		td = row.findAll('td')[1]
 		link = td.find('a', href=True)
-		url = link['href']
+		url = 'http://www.gloucestershire.gov.uk/' + link['href']
 		title = link.contents[0]
 		# create the right strings for the new filename
 		csvYr = title.split(' ')[-2]
