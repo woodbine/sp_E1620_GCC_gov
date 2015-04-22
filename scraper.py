@@ -26,6 +26,7 @@ soup = BeautifulSoup(html)
 rows = soup.findAll('tr')
 
 for row in rows:
+	print row
 	td = row.findAll('td')[1]
 	link = td.find(a, href=True)
 	url = link['href']
