@@ -27,8 +27,8 @@ table = soup.find('tbody')
 rows = table.findAll(tr)
 
 for row in rows:
-  td = row.find('td)[1]
-  link = td.find(a, href=True)
+	td = row.find('td)[1]
+	link = td.find(a, href=True)
 	url = link['href']
 	title = link.contents[0]
 	# create the right strings for the new filename
