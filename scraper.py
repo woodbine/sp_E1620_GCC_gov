@@ -6,8 +6,8 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 
 # Set up variables
-entity_id = "E5043_KUTCRBO_gov"
-url = "http://data.kingston.gov.uk/Kingston_Open_Data/"
+entity_id = "E1620_GCC_gov"
+url = "http://www.gloucestershire.gov.uk/over500"
 
 # Set up functions
 def convert_mth_strings ( mth_string ):
