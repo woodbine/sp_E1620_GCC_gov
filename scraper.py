@@ -26,7 +26,7 @@ soup = BeautifulSoup(html)
 rows = soup.findAll('tr')
 
 for row in rows:
-	if row.find('td') == None:
+	if row.find('td') == None or len(row.findAll('td')) < 2:
 		print 'no file in this row'
 	else:
 		td = row.findAll('td')[1]
