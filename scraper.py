@@ -96,23 +96,22 @@ soup = BeautifulSoup(html, 'lxml')
 
 #### SCRAPE DATA
 
-rows = soup.findAll('tr')
-for row in rows:
-    if row.find('td') == None or len(row.findAll('td')) < 2:
-        pass
-    else:
-        td = row.findAll('td')[1]
-        link = td.find('a', href=True)
-        url = 'http://www.gloucestershire.gov.uk/' + link['href']
-        title = link.contents[0]
-        csvYr = title.split(' ')[-2]
-        csvMth = title.split(' ')[-3][:3]
+block = soup.find('table', attrs={'summary':'Spend over £500'})
+links = soup.find_all('a')
+for link in links:
+    if '.csv' in link['href'] or '.xls' in link['href']:
+        url = 'http://www.gloucestershire.gov.uk' + link['href']
+        title = link.text
         if '_' in title:
-            csvYr = title.split('_')[-1][:4]
-            csvMth = title.split('_')[0].split(' ')[-1][:3]
-        csvMth = csvMth.upper()
-        csvMth = convert_mth_strings(csvMth)
-        data.append([csvYr, csvMth, url])
+            csvYr = title.split()[-1].split('_')[-1][:4]
+            csvMth = title.split()[-1].split('_')[0][:3]
+            csvMth = convert_mth_strings(csvMth.upper())
+            data.append([csvYr, csvMth, url])
+        else:
+            csvYr = title.split()[-1][:4]
+            csvMth = title.split()[-2][:3]
+            csvMth = convert_mth_strings(csvMth.upper())
+            data.append([csvYr, csvMth, url])
 
 #### STORE DATA 1.0
 
